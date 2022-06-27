@@ -70,8 +70,10 @@ const typeDefs = gql`
 
   "Author of a book"
   type Author {
-    "Author's ID"
-    title: String!
+    "Author's id"
+    uid: String!
+    "Author's name"
+    title: String
   }
 
   "A Module is a single unit of teaching. Multiple Modules compose a Track"
