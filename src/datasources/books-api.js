@@ -52,8 +52,27 @@ class BooksAPI extends RESTDataSource {
         console.log("-----------SINGLE_ITEM_QUERY");
         console.log(entry.get("title")); // Retrieve field value by providing a field's uid
         // console.log(entry.toJSON()); // Convert the entry result object to JSON
-        console.log("!!!!!!!!!!!ENTRY", entry);
+        console.log("!!!!!!!!!!!ENTRY", entry.toJSON());
         return entry.toJSON();
+      },
+      function error(err) {
+        // err object
+      }
+    );
+  }
+
+  getArrayOfItems(type, uid) {
+    const Query = Stack.ContentType(type).Entry(uid);
+
+    return Query.fetch().then(
+      function success(entry) {
+        console.log("-----------SINGLE_ITEM_QUERY");
+        console.log(entry.get("title")); // Retrieve field value by providing a field's uid
+        // console.log(entry.toJSON()); // Convert the entry result object to JSON
+        console.log("!!!!!!!!!!!ENTRY", entry.toJSON());
+        const arr = [];
+        return [entry.toJSON()];
+        // return entry.toJSON();
       },
       function error(err) {
         // err object

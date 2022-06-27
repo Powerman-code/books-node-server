@@ -43,6 +43,7 @@ const typeDefs = gql`
     illustrations: String
     "The book's author"
     authorData: Author!
+    genre: [Genre!]!
   }
 
   "A track is a group of Modules that teaches about a specific topic"
@@ -73,6 +74,16 @@ const typeDefs = gql`
     "Author's id"
     uid: String!
     "Author's name"
+    title: String
+    "Author's date of birth"
+    date_of_birth: String
+    "Author's date of death, if exist"
+    date_of_death: String
+  }
+
+  "Genre of a book"
+  type Genre {
+    "Genre's title"
     title: String
   }
 

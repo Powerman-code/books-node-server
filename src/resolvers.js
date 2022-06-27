@@ -17,7 +17,22 @@ const resolvers = {
     //get author of the book
     authorData: ({ author }, _, { dataSources }) => {
       console.log("----------P", author[0].uid);
-      const data = dataSources.booksAPI.getSingleItem("author", author[0].uid);
+      const data = dataSources.booksAPI.getSingleItem(
+        author[0]._content_type_uid,
+        author[0].uid
+      );
+      console.log("DATA", data);
+      return data;
+      // return dataSources.booksAPI.getAuthor(author[0].uid);
+    },
+
+    //get genre of the book
+    genre: ({ genre }, _, { dataSources }) => {
+      console.log("----------P", genre[0].uid);
+      const data = dataSources.booksAPI.getArrayOfItems(
+        genre[0]._content_type_uid,
+        genre[0].uid
+      );
       console.log("DATA", data);
       return data;
       // return dataSources.booksAPI.getAuthor(author[0].uid);
