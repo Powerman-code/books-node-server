@@ -43,7 +43,62 @@ const typeDefs = gql`
     illustrations: String
     "The book's author"
     authorData: Author!
-    genre: [Genre!]!
+    genre: [Genre!]
+    "Imgaes of the book"
+    images: [Image!]
+    "Locale"
+    locale: String
+    "Number of book's pages"
+    number_of_pages: Int
+    "Publishing House of the Book"
+    publishing_house: Publishing_house!
+  }
+
+  "Publishing house of the book"
+  type Publishing_house {
+    title: String
+    descriptionText: String
+    logo: Publishing_house_logo
+  }
+
+  "Publishing house logos"
+  type Publishing_house_logo {
+    "Title of the logo image"
+    title: String
+    "Type of the logo image"
+    content_type: String
+    "Url of the logo image"
+    url: String
+  }
+
+  "Author of a book"
+  type Author {
+    "Author's id"
+    uid: String!
+    "Author's name"
+    title: String
+    "Author's date of birth"
+    date_of_birth: String
+    "Author's date of death, if exist"
+    date_of_death: String
+  }
+
+  "Genre of a book"
+  type Genre {
+    "Genre's title"
+    title: String
+  }
+
+  "Images of the book"
+  type Image {
+    "Id of the image"
+    uid: String
+    "Title of the image"
+    title: String
+    "Type of the image"
+    content_type: String
+    "Url of the image"
+    url: String
   }
 
   "A track is a group of Modules that teaches about a specific topic"
@@ -67,24 +122,6 @@ const typeDefs = gql`
     numberOfViews: Int
     "The track's complete array of Modules"
     modules: [Module!]!
-  }
-
-  "Author of a book"
-  type Author {
-    "Author's id"
-    uid: String!
-    "Author's name"
-    title: String
-    "Author's date of birth"
-    date_of_birth: String
-    "Author's date of death, if exist"
-    date_of_death: String
-  }
-
-  "Genre of a book"
-  type Genre {
-    "Genre's title"
-    title: String
   }
 
   "A Module is a single unit of teaching. Multiple Modules compose a Track"

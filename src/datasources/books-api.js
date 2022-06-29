@@ -18,17 +18,40 @@ class BooksAPI extends RESTDataSource {
     // this.baseURL = "https://odyssey-lift-off-rest-api.herokuapp.com/";
   }
 
-  getMultipleItems(type) {
+  getEntryField() {
+    const Query = Stack.ContentType("book_details").Query();
+    return Query.exists("group")
+      .toJSON()
+      .find()
+      .then(
+        function success(result) {
+          console.log("----------getEntryField", result);
+          return result;
+          // result is array where -
+          // result[0] =&gt; entry objects
+          // result[result.length-1] =&gt; entry objects count included only when .includeCount() is queried.
+          // result[1] =&gt; schema of the content type is included when .includeSchema() is queried.
+        },
+        function error(err) {
+          console.log("ERROR");
+          console.log(err);
+          return err;
+          // err object
+        }
+      );
+  }
+
+  getMultipleItems(type, filterTitle = "title", filterParam) {
     const Query = Stack.ContentType(type).Query();
 
-    return Query.where("title")
+    return Query.where(filterTitle, filterParam)
       .includeSchema()
       .includeCount()
       .toJSON()
       .find()
       .then(
         function success(result) {
-          console.log("----------MULTIPLE_ITEMS_QUERY", result[0]);
+          // console.log("----------MULTIPLE_ITEMS_QUERY", result[0]);
           return result[0];
           // result is array where -
           // result[0] =&gt; entry objects
