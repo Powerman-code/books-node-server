@@ -10,10 +10,54 @@ const resolvers = {
     book: (_, { id }, { dataSources }) => {
       return dataSources.booksAPI.getSingleItem("book_details", id);
     },
-    // author: (_, { id }, { dataSources }) => {
-    //   // return dataSources.booksAPI.getTrack(id);
-    // },
+
+    //get Homepage
+    homepage: async (_, { id }, { dataSources }) => {
+      const data = await dataSources.booksAPI.getMultipleItems("home_page");
+      console.log(data);
+      let formetedData = {};
+      data[0].homepage_components.map((item) => {
+        console.log("ITEM", item);
+        Object.assign(formetedData, item);
+      });
+      console.log("_______FD", formetedData);
+      return { ...data[0], ...formetedData };
+    },
   },
+
+  Footer_section: {
+    navigation_menu: async ({ navigation_menu }, _, { dataSources }) => {
+      const data = await dataSources.booksAPI.getSingleItem(
+        navigation_menu[0]._content_type_uid,
+        navigation_menu[0].uid
+      );
+      console.log("!!!!!!!!! NAV MENU", data.navigation_menu_items[0]);
+      return data;
+    },
+  },
+
+  Header_section: {
+    navigation_menu: async ({ navigation_menu }, _, { dataSources }) => {
+      const data = await dataSources.booksAPI.getSingleItem(
+        navigation_menu[0]._content_type_uid,
+        navigation_menu[0].uid
+      );
+      console.log("!!!!!!!!! NAV MENU", data.navigation_menu_items[0]);
+      return data;
+    },
+  },
+
+  Navigation_menu_items: {
+    page_reference: async ({ page_reference }, _, { dataSources }) => {
+      const data = await dataSources.booksAPI.getSingleItem(
+        page_reference[0]._content_type_uid,
+        page_reference[0].uid
+      );
+      console.log("!!!!!!!!! PAGE_reference", data);
+      return data;
+    },
+  },
+
   Book: {
     //get author of the book
     authorData: ({ author }, _, { dataSources }) => {
