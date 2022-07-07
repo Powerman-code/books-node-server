@@ -79,6 +79,7 @@ const typeDefs = gql`
     "The Year, when the book was published first"
     publishing_year: String
     suggested_year: Int
+    description: Book_description!
   }
 
   "Publishing house of the book"
@@ -96,6 +97,11 @@ const typeDefs = gql`
     content_type: String
     "Url of the logo image"
     url: String
+  }
+
+  "Description of the book"
+  type Book_description {
+    text: String
   }
 
   "Author of a book"
