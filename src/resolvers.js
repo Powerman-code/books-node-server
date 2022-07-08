@@ -68,22 +68,13 @@ const resolvers = {
       return data;
     },
 
-    description: (parent, _, { dataSources }) => {
-      let text = "";
-
-      parent?.book_description?.children?.map((item) => {
-        console.log("WWWWWWWWW", typeof item?.children[0]?.text);
-        text = item?.children[0]?.text;
-      });
-
-      console.log("zzzzzzzzzzzz", text);
-      // parent.book_description.children.map((item) => item.children);
-
-      const data = {};
-      data.text = text;
-
-      console.log("!~!~!~!~!~!", data);
-      return data;
+    description: (parent) => {
+      console.log("PARENT", parent?.book_description);
+      return {
+        text:
+          parent?.book_description?.children[0].children[0]?.text ||
+          "no description",
+      };
     },
 
     genre: ({ genre }, _, { dataSources }) => {
