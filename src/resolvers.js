@@ -14,13 +14,10 @@ const resolvers = {
     //get Homepage
     homepage: async (_, { id }, { dataSources }) => {
       const data = await dataSources.booksAPI.getMultipleItems("home_page");
-      // console.log(data);
       let formetedData = {};
       data[0].homepage_components.map((item) => {
-        // console.log("ITEM", item);
         Object.assign(formetedData, item);
       });
-      // console.log("_______FD", formetedData);
       return { ...data[0], ...formetedData };
     },
   },
@@ -31,7 +28,6 @@ const resolvers = {
         navigation_menu[0]._content_type_uid,
         navigation_menu[0].uid
       );
-      // console.log("!!!!!!!!! NAV MENU", data.navigation_menu_items[0]);
       return data;
     },
   },
@@ -42,7 +38,6 @@ const resolvers = {
         navigation_menu[0]._content_type_uid,
         navigation_menu[0].uid
       );
-      // console.log("!!!!!!!!! NAV MENU", data.navigation_menu_items[0]);
       return data;
     },
   },
@@ -53,7 +48,6 @@ const resolvers = {
         page_reference[0]._content_type_uid,
         page_reference[0].uid
       );
-      // console.log("!!!!!!!!! PAGE_reference", data);
       return data;
     },
   },
@@ -88,7 +82,7 @@ const resolvers = {
 
     //TODO: Clear unused args, and check
 
-    images: async ({ group }, _, { dataSources }) => {
+    images: async ({ group }) => {
       return group.map((i) => i.image);
     },
 
@@ -99,7 +93,6 @@ const resolvers = {
       );
       let text = "";
       data.description.children.map((child) => {
-        // console.log("child", child?.children[0]?.text);
         text = child?.children[0]?.text;
       });
       const formatedData = { ...data, descriptionText: text };
