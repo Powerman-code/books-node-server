@@ -45,7 +45,7 @@ class BooksAPI extends RESTDataSource {
       function success(entry) {
         console.log("-----------SINGLE_ITEM_QUERY");
         console.log(entry.get("title")); // Retrieve field value by providing a field's uid
-        // console.log("!!!!!!!!!!!ENTRY", entry.toJSON());
+        console.log("!!!!!!!!!!!ENTRY", entry.toJSON());
         return entry.toJSON();
       },
       function error(err) {
@@ -73,6 +73,18 @@ class BooksAPI extends RESTDataSource {
   //     }
   //   );
   // }
+
+  // getEntryByUrl = async (contentTypeUid, referenceField, entryUrl) => {
+  //   const Query = Stack.ContentType(contentTypeUid).Query();
+
+  //   if (referenceField) Query.includeReference(referenceField);
+  //   try {
+  //     const result = await Query.where("url", `${entryUrl}`).toJSON().find();
+  //     return result[0][0];
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 }
 
 module.exports = BooksAPI;

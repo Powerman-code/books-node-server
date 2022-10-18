@@ -4,8 +4,8 @@ const typeDefs = gql`
   type Query {
     "Query to get all books"
     allBooks: [Book!]!
-    "Fetch a specific book, provided a book's ID"
-    book(id: ID!): Book!
+    "Fetch a specific book, provided a book's URL"
+    book(url: String!): Book!
     "Fetch Author"
     authorData(id: ID!): Author!
     "Homepage of the site"
@@ -61,7 +61,9 @@ const typeDefs = gql`
     uid: String!
     "The books's title"
     title: String!
-    "The books's rating"
+    "The book's URL"
+    url: String!
+    "The book's rating"
     rating: Int
     "Type of book illustrations. Could be colored or blach and white"
     illustrations: String

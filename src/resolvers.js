@@ -3,12 +3,20 @@ const resolvers = {
     //get books
     allBooks: async (_, __, { dataSources }) => {
       const data = await dataSources.booksAPI.getMultipleItems("book_details");
+      console.log("🚀 ~ file: resolvers.js ~ line 6 ~ allBooks: ~ data", data);
       return data;
     },
 
-    //get specific book by id
-    book: (_, { id }, { dataSources }) => {
-      return dataSources.booksAPI.getSingleItem("book_details", id);
+    //get specific book by url
+    book: async (_, { url }, { dataSources }) => {
+      const data = await dataSources.booksAPI.getMultipleItems(
+        "book_details",
+        "url",
+        url
+      );
+      console.log("🚀 ~ file: resolvers.js ~ line 17 ~ book: ~ url", url);
+      console.log("🚀 ~ file: resolvers.js ~ line 20 ~ data", data[0]);
+      return data[0];
     },
 
     //get Homepage
